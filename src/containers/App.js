@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
+import { BrowserRouter as Router, Link, Redirect } from 'react-router-dom';
 import './App.css';
-import LazyComponent from '../components/LazyComponent';
+import Route from 'react-router-dom/Route';
+import WaitingComponent from '../components/WaitingComponent';
+
+const LazyHome = React.lazy(() => import('./Home'));
+const LazyProfile = React.lazy(() => import('./Profile'));
 
 class App extends Component {
   state = {
@@ -8,13 +13,14 @@ class App extends Component {
   };
 
   render() {
-    const { isLoaded } = this.state;
     return (
-      <div className="App">
-        <h1>Welcome to App</h1>
-        {isLoaded && <LazyComponent />}
-        <button onClick={() => this.setState({ isLoaded: !isLoaded })}>Toggle Component</button>
-      </div>
+      <Router>
+        <div className="App">
+          <Redirect from="/" to="/home" />
+          <Route exact path="/home" component={WaitingComponent(LazyHome)} />
+          <Route exact path="/profile" component={WaitingComponent(LazyProfile)} />
+        </div>
+      </Router>
     );
   }
 }
