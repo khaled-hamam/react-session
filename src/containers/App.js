@@ -1,16 +1,12 @@
 import React, { Component } from 'react';
-import ClassComponent from '../components/ClassComponent';
 import './App.css';
-import FunctionalComponent from '../components/FunctionalComponent';
-import MyPureComponent from '../components/PureComponent';
+import ListComponent from '../components/ListComponent';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <ClassComponent />
-        <FunctionalComponent />
-        <MyPureComponent />
+        <ListComponent list={['item 1', 'item 2', 'item 3']} />
       </div>
     );
   }
