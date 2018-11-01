@@ -1,23 +1,20 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import './App.css';
-import Profile from './Profile';
-import Home from './Home';
-import NotFound from './NotFound';
+import LazyComponent from '../components/LazyComponent';
 
 class App extends Component {
+  state = {
+    isLoaded: false
+  };
+
   render() {
+    const { isLoaded } = this.state;
     return (
-      <Router>
-        <div className="App">
-          <Switch>
-            <Redirect from="/home" to="/" />
-            <Route exact path="/" component={Home} />
-            <Route exact path="/profile" component={Profile} />
-            <Route component={NotFound} />
-          </Switch>
-        </div>
-      </Router>
+      <div className="App">
+        <h1>Welcome to App</h1>
+        {isLoaded && <LazyComponent />}
+        <button onClick={() => this.setState({ isLoaded: !isLoaded })}>Toggle Component</button>
+      </div>
     );
   }
 }
