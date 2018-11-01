@@ -1,25 +1,16 @@
 import React, { Component } from 'react';
-import ChildComponent from '../components/ChildComponent';
+import ClassComponent from '../components/ClassComponent';
 import './App.css';
-import Counter from '../components/Counter';
+import FunctionalComponent from '../components/FunctionalComponent';
+import MyPureComponent from '../components/PureComponent';
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      name: 'App Component',
-      showCounter: true
-    };
-  }
-
   render() {
-    const { name, showCounter } = this.state;
     return (
       <div className="App">
-        <h1>{name}</h1>
-        <ChildComponent parent={name} />
-        {showCounter && <Counter />}
-        <button onClick={() => this.setState({ showCounter: !showCounter })}>Toggle Counter</button>
+        <ClassComponent />
+        <FunctionalComponent />
+        <MyPureComponent />
       </div>
     );
   }
