@@ -1,23 +1,27 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import './App.css';
-import Profile from './Profile';
-import Home from './Home';
-import NotFound from './NotFound';
+import Parent from '../components/Parent';
+import Child from '../components/Child';
+import Loadable from '../components/Loadable';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { isLoading: false };
+  }
+
   render() {
+    const { isLoading } = this.state;
     return (
-      <Router>
-        <div className="App">
-          <Switch>
-            <Redirect from="/home" to="/" />
-            <Route exact path="/" component={Home} />
-            <Route exact path="/profile" component={Profile} />
-            <Route component={NotFound} />
-          </Switch>
-        </div>
-      </Router>
+      <div className="App">
+        <Parent>
+          <Child />
+          <Loadable isLoading={isLoading}>
+            <Child />
+          </Loadable>
+          <button onClick={() => this.setState({ isLoading: !isLoading })}>Toggle Load</button>
+        </Parent>
+      </div>
     );
   }
 }
